@@ -27,14 +27,22 @@ class Customer {
             // add frequent renter points
             frequentRenterPoints += each.getFrequentRenterPoints();
             // add bonus for a two day new release rental
-            totalAmount += each.getCharge();
+            private double getTotalCharge() {
+                double result = 0;
+                Enumeration rentals = _rentals.elements();
+                while (rentals.hasMoreElements()) {
+                    Rental each = (Rental) rentals.nextElement();
+                    result += each.getCharge();
+                }
+                return result;
+            }
             //show figures for this rental
             result += "\t" + each.getMovie().getTitle()+ "\t" + "\t" + each.getDaysRented() + "\t" + String.valueOf(thisAmount) + "\n";
         //thisAmount got change out so this makes it easier
 
         }
         //add footer lines
-        result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
+        result += "Amount owed is " + String.valueOf(getTotalCharge()) + "\n";
         result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points";
         return result;
     }
