@@ -24,17 +24,14 @@ class Customer {
         while (enum_rentals.hasMoreElements()) {
             double thisAmount = 0;
             Rental each = (Rental) enum_rentals.nextElement();
-            //determine amounts for each line
-            }
             // add frequent renter points
-            frequentRenterPoints ++;
+            frequentRenterPoints += each.getFrequentRenterPoints();
             // add bonus for a two day new release rental
-            if ((each.getMovie().getPriceCode() == Movie.NEW_RELEASE) && each.getDaysRented() > 1) 
-                frequentRenterPoints ++;
+            totalAmount += each.getCharge();
             //show figures for this rental
             result += "\t" + each.getMovie().getTitle()+ "\t" + "\t" + each.getDaysRented() + "\t" + String.valueOf(thisAmount) + "\n";
         //thisAmount got change out so this makes it easier
-            totalAmount += each.getCharge();
+
         }
         //add footer lines
         result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
